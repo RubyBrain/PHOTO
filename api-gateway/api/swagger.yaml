@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: Photo Booking API Gateway
+  description: |
+    Единый API для сервиса записи на фотосъемку.
+    Обеспечивает взаимодействие между клиентами, фотографами и микросервисами.
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@photo-booking.com
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://api.photo-booking.com/v1
+    description: Production server
+  - url: http://localhost:8080/v1
+    description: Local development server
+
+paths:
+  /auth/login:
+    post:
+      tags: [Authentication]
+      summary: Вход в систему
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Успешная аутентификация
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  responses:
+    UnauthorizedError:
+      description: Неверные учетные данные
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServerError:
+      description: Ошибка сервера
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        role:
+          type: string
+          enum: [client, photographer]
+          default: client
+
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        user_id:
+          type: string
+          format: uuid
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              issue:
+                type: string
