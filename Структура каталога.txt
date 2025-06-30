@@ -1,4 +1,4 @@
-photo-booking-api-gateway/
+api-gateway/
 ├── .github/                          # CI/CD и workflows
 │   └── workflows/
 │       ├── ci.yml                    # Тесты и сборка
