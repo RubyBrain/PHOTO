@@ -9,3 +9,7 @@
 ## Запуск
 ```bash
 go run main.go
+
+## Архитектура
+- Основное приложение (MVC): `models/`, `controllers/`  
+- Микросервис API Gateway: [`api-gateway/`](/api-gateway/README.md)  
