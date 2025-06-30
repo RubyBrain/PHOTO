@@ -1,0 +1,72 @@
+api-gateway/
+├── cmd/
+│   └── main.go                # Точка входа приложения
+│
+├── internal/
+│   ├── config/
+│   │   └── config.go          # Загрузка и обработка конфигурации
+│   │
+│   ├── controllers/
+│   │   ├── auth.go            # Контроллеры аутентификации
+│   │   ├── bookings.go        # Контроллеры бронирований
+│   │   └── schedule.go        # Контроллеры расписания
+│   │
+│   ├── middleware/
+│   │   ├── auth.go            # Middleware аутентификации
+│   │   ├── cache.go           # Middleware кэширования
+│   │   ├── logging.go         # Middleware логирования
+│   │   └── metrics.go         # Middleware метрик
+│   │
+│   ├── models/
+│   │   ├── request.go         # Модели запросов
+│   │   └── response.go        # Модели ответов
+│   │
+│   ├── services/
+│   │   ├── auth_service.go    # Сервис аутентификации
+│   │   ├── cache_service.go   # Сервис кэширования
+│   │   └── client_service.go  # Клиенты для микросервисов
+│   │
+│   └── utils/
+│       ├── errors.go          # Обработка ошибок
+│       └── validators.go      # Валидаторы данных
+│
+├── pkg/
+│   ├── grpc_client/           # gRPC клиенты для микросервисов
+│   │   ├── booking.go
+│   │   ├── notification.go
+│   │   └── schedule.go
+│   │
+│   └── proto/                 # Сгенерированные proto-файлы
+│       ├── booking/
+│       ├── notification/
+│       └── schedule/
+│
+├── api/
+│   ├── swagger.yaml           # Swagger/OpenAPI спецификация
+│   └── http/
+│       ├── v1/
+│       │   └── routes.go      # Маршруты API v1
+│       └── v2/
+│           └── routes.go      # Маршруты API v2 (если нужно)
+│
+├── configs/
+│   ├── config.yaml            # Основной конфигурационный файл
+│   └── config.dev.yaml        # Конфигурация для разработки
+│
+├── scripts/
+│   ├── generate_proto.sh      # Скрипт генерации proto-файлов
+│   └── migrate.sh             # Скрипты миграции (если нужны)
+│
+├── tests/
+│   ├── integration/           # Интеграционные тесты
+│   └── unit/                  # Юнит-тесты
+│       ├── controllers/
+│       ├── middleware/
+│       └── services/
+│
+├── Dockerfile                 # Конфигурация Docker
+├── docker-compose.yml         # Конфигурация для локального запуска
+├── go.mod                     # Go модули
+├── go.sum                     # Зависимости
+├── Makefile                   # Утилиты для сборки и запуска
+└── README.md                  # Документация проекта
