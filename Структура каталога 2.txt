@@ -1,0 +1,83 @@
+photo-booking-api-gateway/
+├── .github/                          # CI/CD и workflows
+│   └── workflows/
+│       ├── ci.yml                    # Тесты и сборка
+│       └── deploy.yml                # Деплой в prod/staging
+├── api/
+│   ├── http/                         # API-спецификации
+│   │   ├── v1/
+│   │   │   ├── handlers/             # HTTP-обработчики
+│   │   │   ├── docs.go               # Swagger аннотации
+│   │   │   └── routes.go             # Маршруты
+│   ├── proto/                        # gRPC proto-файлы
+│   │   ├── booking/
+│   │   │   └── booking.proto
+│   │   └── schedule/
+│   └── swagger/                      # OpenAPI/Swagger
+│       ├── swagger.yaml
+│       └── swagger-ui/               # Локальная документация
+├── cmd/
+│   └── main.go                       # Точка входа
+├── configs/
+│   ├── config.yaml                   # Основной конфиг
+│   ├── config.dev.yaml               # Конфиг для разработки
+│   └── config.prod.yaml              # Конфиг для production
+├── deployments/                      # Конфигурации развертывания
+│   ├── docker-compose.yml            # Локальный запуск
+│   ├── k8s/
+│   │   ├── deployment.yaml
+│   │   └── service.yaml
+│   └── terraform/                    # IaC
+│       ├── main.tf
+│       └── variables.tf
+├── docs/                             # Документация
+│   ├── ARCHITECTURE.md
+│   ├── API.md
+│   └── DEVELOPMENT.md
+├── internal/                         # Основная логика
+│   ├── config/
+│   │   ├── config.go                 # Загрузка конфигурации
+│   │   └── env_loader.go             # Переменные окружения
+│   ├── controllers/
+│   │   ├── auth.go                   # Контроллеры аутентификации
+│   │   └── bookings.go               # Контроллеры бронирований
+│   ├── middleware/
+│   │   ├── auth.go                   # Auth middleware
+│   │   ├── logging.go                # Логирование
+│   │   └── metrics.go                # Prometheus-метрики
+│   ├── models/                       # DTO и сущности
+│   │   ├── request.go
+│   │   └── response.go
+│   ├── repositories/                 # Работа с БД
+│   │   └── postgres/
+│   │       ├── bookings.go
+│   │       └── users.go
+│   ├── services/
+│   │   ├── auth_service.go           # JWT, авторизация
+│   │   └── cache_service.go          # Redis-кэш
+│   └── utils/
+│       ├── errors.go                 # Кастомные ошибки
+│       └── validators.go             # Валидация данных
+├── pkg/
+│   ├── grpc_client/                  # gRPC-клиенты
+│   │   ├── booking.go
+│   │   └── schedule.go
+│   └── logging/                      # Общие утилиты
+│       └── logger.go
+├── scripts/                          # Вспомогательные скрипты
+│   ├── migrate.sh                    # Миграции БД
+│   └── generate_proto.sh             # Генерация gRPC-кода
+├── tests/                            # Тесты
+│   ├── integration/                  # Интеграционные тесты
+│   │   └── auth_test.go
+│   ├── load/                         # Нагрузочные тесты
+│   │   └── locustfile.py
+│   └── unit/                         # Юнит-тесты
+│       ├── services/
+│       └── utils/
+├── .env.example                      # Шаблон .env
+├── .gitignore                        # Игнорируемые файлы
+├── Dockerfile                        # Конфигурация Docker
+├── go.mod                            # Зависимости Go
+├── Makefile                          # Утилиты для сборки
+└── README.md                         # Описание проекта
